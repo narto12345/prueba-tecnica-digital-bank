@@ -5,10 +5,17 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Backend_PruebaDigitalBank</RootNamespace>
+    <UserSecretsId>de589260-6ddc-4f4a-92c7-4c295b295a59</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.4.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Business\Services\" />
+    <Folder Include="Web\Controllers\" />
   </ItemGroup>
 
 </Project>

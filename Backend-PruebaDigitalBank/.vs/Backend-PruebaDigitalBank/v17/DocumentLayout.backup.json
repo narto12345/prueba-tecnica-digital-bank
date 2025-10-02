@@ -1,7 +1,24 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\source-code\\prueba-digital-bank\\Backend-PruebaDigitalBank\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D80B872A-CB86-4A3E-A9BD-B2A6B1D736F4}|Backend-PruebaDigitalBank.csproj|c:\\source-code\\prueba-digital-bank\\backend-pruebadigitalbank\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D80B872A-CB86-4A3E-A9BD-B2A6B1D736F4}|Backend-PruebaDigitalBank.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D80B872A-CB86-4A3E-A9BD-B2A6B1D736F4}|Backend-PruebaDigitalBank.csproj|c:\\source-code\\prueba-digital-bank\\backend-pruebadigitalbank\\data\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D80B872A-CB86-4A3E-A9BD-B2A6B1D736F4}|Backend-PruebaDigitalBank.csproj|solutionrelative:data\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D80B872A-CB86-4A3E-A9BD-B2A6B1D736F4}|Backend-PruebaDigitalBank.csproj|c:\\source-code\\prueba-digital-bank\\backend-pruebadigitalbank\\data\\dao\\iuserdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D80B872A-CB86-4A3E-A9BD-B2A6B1D736F4}|Backend-PruebaDigitalBank.csproj|solutionrelative:data\\dao\\iuserdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D80B872A-CB86-4A3E-A9BD-B2A6B1D736F4}|Backend-PruebaDigitalBank.csproj|c:\\source-code\\prueba-digital-bank\\backend-pruebadigitalbank\\data\\dao\\usersqlserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D80B872A-CB86-4A3E-A9BD-B2A6B1D736F4}|Backend-PruebaDigitalBank.csproj|solutionrelative:data\\dao\\usersqlserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,8 +26,47 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\source-code\\prueba-digital-bank\\Backend-PruebaDigitalBank\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\source-code\\prueba-digital-bank\\Backend-PruebaDigitalBank\\Program.cs*",
+              "RelativeToolTip": "Program.cs*",
+              "ViewState": "AgIAABYAAAAAAAAAAAAowCIAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T03:27:15.402Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\source-code\\prueba-digital-bank\\Backend-PruebaDigitalBank\\Data\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Data\\Models\\User.cs",
+              "ToolTip": "C:\\source-code\\prueba-digital-bank\\Backend-PruebaDigitalBank\\Data\\Models\\User.cs",
+              "RelativeToolTip": "Data\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T03:13:02.225Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IUserDAO.cs",
+              "DocumentMoniker": "C:\\source-code\\prueba-digital-bank\\Backend-PruebaDigitalBank\\Data\\DAO\\IUserDAO.cs",
+              "RelativeDocumentMoniker": "Data\\DAO\\IUserDAO.cs",
+              "ToolTip": "C:\\source-code\\prueba-digital-bank\\Backend-PruebaDigitalBank\\Data\\DAO\\IUserDAO.cs",
+              "RelativeToolTip": "Data\\DAO\\IUserDAO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T02:53:26.392Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
@@ -18,6 +74,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserSQLServer.cs",
+              "DocumentMoniker": "C:\\source-code\\prueba-digital-bank\\Backend-PruebaDigitalBank\\Data\\DAO\\UserSQLServer.cs",
+              "RelativeDocumentMoniker": "Data\\DAO\\UserSQLServer.cs",
+              "ToolTip": "C:\\source-code\\prueba-digital-bank\\Backend-PruebaDigitalBank\\Data\\DAO\\UserSQLServer.cs",
+              "RelativeToolTip": "Data\\DAO\\UserSQLServer.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAywBsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T02:49:42.027Z",
+              "EditorCaption": ""
             }
           ]
         }

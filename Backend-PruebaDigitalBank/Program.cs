@@ -1,34 +1,40 @@
+using Backend_PruebaDigitalBank.Data.DAO;
+using Backend_PruebaDigitalBank.Data.Models;
 
 namespace Backend_PruebaDigitalBank
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+	public class Program
+	{
+		public static async Task Main(string[] args)
+		{
+			var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+			builder.Services.AddControllers();
+			builder.Services.AddEndpointsApiExplorer();
+			builder.Services.AddSwaggerGen();
 
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+			// Dependency Injection
+			builder.Services.AddSingleton<IUserDAO, UserSQLServer>();
 
-            var app = builder.Build();
+			var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+			if (app.Environment.IsDevelopment())
+			{
+				app.UseSwagger();
+				app.UseSwaggerUI();
+			}
 
-            app.UseAuthorization();
+			app.UseAuthorization();
 
+			app.MapControllers();
 
-            app.MapControllers();
+			app.Run();
 
-            app.Run();
-        }
-    }
+			//IUserDAO userDAO = new UserSQLServer();
+
+			//User? userFounded = await userDAO.GetById(4);
+
+			//Console.WriteLine(userFounded);
+		}
+	}
 }
