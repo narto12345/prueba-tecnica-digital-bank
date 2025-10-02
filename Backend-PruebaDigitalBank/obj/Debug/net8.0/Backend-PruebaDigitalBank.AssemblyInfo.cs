@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Backend-PruebaDigitalBank")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+11931d513e2db0b0e24988502cc39fac9063572c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bf9b6d465c6ed48abb474327fab6c43e1a441f12")]
 [assembly: System.Reflection.AssemblyProductAttribute("Backend-PruebaDigitalBank")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Backend-PruebaDigitalBank")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

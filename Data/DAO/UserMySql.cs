@@ -1,15 +1,15 @@
-﻿using Backend_PruebaDigitalBank.Data.Models;
+﻿using Data.Models;
 using MySql.Data.MySqlClient;
 using System.Data;
 
-namespace Backend_PruebaDigitalBank.Data.DAO;
+namespace Data.DAO;
 
-public class UserSQLServer : IUserDAO
+public class UserMySql : IUserDAO
 {
 
 	private readonly string connectionString;
 
-	public UserSQLServer()
+	public UserMySql()
 	{
 		connectionString = "Server=localhost;Database=prueba_digital_bank;User ID=root;Password=12345;";
 	}

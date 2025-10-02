@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36408.4 d17.14
+VisualStudioVersion = 17.14.36408.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend-PruebaDigitalBank", "Backend-PruebaDigitalBank.csproj", "{D80B872A-CB86-4A3E-A9BD-B2A6B1D736F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "..\Business\Business.csproj", "{1132A36F-BABD-4E60-9D70-422B54AABF02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "..\Data\Data.csproj", "{779B5869-340D-4BC1-BB8F-3825A43F5D37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{D80B872A-CB86-4A3E-A9BD-B2A6B1D736F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D80B872A-CB86-4A3E-A9BD-B2A6B1D736F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D80B872A-CB86-4A3E-A9BD-B2A6B1D736F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1132A36F-BABD-4E60-9D70-422B54AABF02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1132A36F-BABD-4E60-9D70-422B54AABF02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1132A36F-BABD-4E60-9D70-422B54AABF02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1132A36F-BABD-4E60-9D70-422B54AABF02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{779B5869-340D-4BC1-BB8F-3825A43F5D37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{779B5869-340D-4BC1-BB8F-3825A43F5D37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{779B5869-340D-4BC1-BB8F-3825A43F5D37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{779B5869-340D-4BC1-BB8F-3825A43F5D37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

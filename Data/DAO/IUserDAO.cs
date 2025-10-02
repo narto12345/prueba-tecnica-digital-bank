@@ -1,6 +1,6 @@
-﻿using Backend_PruebaDigitalBank.Data.Models;
+﻿using Data.Models;
 
-namespace Backend_PruebaDigitalBank.Data.DAO;
+namespace Data.DAO;
 
 public interface IUserDAO
 {

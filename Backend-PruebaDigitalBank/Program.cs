@@ -1,11 +1,8 @@
-using Backend_PruebaDigitalBank.Data.DAO;
-using Backend_PruebaDigitalBank.Data.Models;
-
 namespace Backend_PruebaDigitalBank
 {
 	public class Program
 	{
-		public static async Task Main(string[] args)
+		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +11,10 @@ namespace Backend_PruebaDigitalBank
 			builder.Services.AddSwaggerGen();
 
 			// Dependency Injection
-			builder.Services.AddSingleton<IUserDAO, UserSQLServer>();
+			builder.Services.AddSingleton<Data.DAO.IUserDAO, Data.DAO.UserMySql>();
+
+			// Test
+			builder.Services.AddHostedService<Test>();
 
 			var app = builder.Build();
 
@@ -29,12 +29,6 @@ namespace Backend_PruebaDigitalBank
 			app.MapControllers();
 
 			app.Run();
-
-			//IUserDAO userDAO = new UserSQLServer();
-
-			//User? userFounded = await userDAO.GetById(4);
-
-			//Console.WriteLine(userFounded);
 		}
 	}
 }

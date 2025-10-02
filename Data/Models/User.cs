@@ -1,4 +1,4 @@
-﻿namespace Backend_PruebaDigitalBank.Data.Models;
+﻿namespace Data.Models;
 
 public class User
 {
@@ -13,6 +13,6 @@ public class User
 
 	public override string? ToString()
 	{
-		return $"${Id} - {Name} - {BirthdateFormatted} - {Gender}";
+		return $"{Id} - {Name} - {BirthdateFormatted} - {Gender}";
 	}
 }
