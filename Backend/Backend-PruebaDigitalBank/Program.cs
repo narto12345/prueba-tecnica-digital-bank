@@ -1,3 +1,5 @@
+using MediatR;
+
 namespace Backend_PruebaDigitalBank
 {
 	public class Program
@@ -10,8 +12,14 @@ namespace Backend_PruebaDigitalBank
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
 
+			// Mediator Configuration
+			builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(System.Reflection.Assembly.GetExecutingAssembly()));
+
 			// Dependency Injection
 			builder.Services.AddSingleton<Data.DAO.IUserDAO, Data.DAO.UserMySql>();
+
+			// Handlers
+			builder.Services.AddSingleton<IRequestHandler<Business.Commands.User.GetById, Business.Commands.User.GetIdResponse>, Business.Handlers.User.GetById>();
 
 			// Test
 			builder.Services.AddHostedService<Test>();

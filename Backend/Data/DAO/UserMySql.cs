@@ -1,17 +1,19 @@
 ﻿using Data.Models;
+using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using System.Data;
+
 
 namespace Data.DAO;
 
 public class UserMySql : IUserDAO
 {
 
-	private readonly string connectionString;
+	private readonly string _connectionString;
 
-	public UserMySql()
+	public UserMySql(IConfiguration configuration)
 	{
-		connectionString = "Server=localhost;Database=prueba_digital_bank;User ID=root;Password=12345;";
+		_connectionString = configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string not found!");
 	}
 
 	public async Task<List<User>> GetAll()
@@ -23,7 +25,7 @@ public class UserMySql : IUserDAO
 	{
 		User? user = null;
 
-		using (var conn = new MySqlConnection(connectionString))
+		using (var conn = new MySqlConnection(_connectionString))
 		using (var cmd = new MySqlCommand("sp_users_crud", conn))
 		{
 			cmd.CommandType = CommandType.StoredProcedure;
