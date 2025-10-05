@@ -18,7 +18,39 @@ public class UserMySql : IUserDAO
 
 	public async Task<List<User>> GetAll()
 	{
-		throw new NotImplementedException();
+		List<User>? users = new();
+
+		using (var conn = new MySqlConnection(_connectionString))
+		using (var cmd = new MySqlCommand("sp_users_crud", conn))
+		{
+			cmd.CommandType = CommandType.StoredProcedure;
+			cmd.Parameters.AddWithValue("@p_action", "SELECT");
+			cmd.Parameters.AddWithValue("@p_id", null);
+			cmd.Parameters.AddWithValue("@p_name", null);
+			cmd.Parameters.AddWithValue("@p_birthdate", null);
+			cmd.Parameters.AddWithValue("@p_gender", null);
+
+			await conn.OpenAsync();
+
+
+			using (System.Data.Common.DbDataReader reader = await cmd.ExecuteReaderAsync())
+			{
+				while (await reader.ReadAsync())
+				{
+					User user = new User
+					{
+						Id = reader.GetInt32("Id"),
+						Name = reader.GetString("Name"),
+						Birthdate = DateOnly.FromDateTime(reader.GetDateTime(reader.GetOrdinal("birthdate"))),
+						Gender = reader.GetChar(reader.GetOrdinal("gender"))
+					};
+
+					users.Add(user);
+				}
+			}
+		}
+
+		return users;
 	}
 
 	public async Task<User?> GetById(int id)

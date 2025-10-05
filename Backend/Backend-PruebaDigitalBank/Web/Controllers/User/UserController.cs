@@ -38,4 +38,25 @@ public class UserController : ControllerBase
 			Data = result.User
 		});
 	}
+
+	[HttpGet]
+	public async Task<ActionResult> GetAll()
+	{
+		Business.Commands.User.GetAllResponse result = await _mediator.Send(new Business.Commands.User.GetAll());
+
+		if (!result.Success)
+		{
+			return StatusCode((int)result.StatusCode, new
+			{
+				Status = result.StatusCode,
+				Message = result.ErrorMessage
+			});
+		}
+
+		return StatusCode((int)result.StatusCode, new
+		{
+			Status = result.StatusCode,
+			Data = result.User
+		});
+	}
 }
