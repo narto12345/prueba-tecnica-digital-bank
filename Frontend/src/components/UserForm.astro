@@ -44,49 +44,110 @@ const dateString = `${year}-${month}-${day}`;
 
 <script>
   import { routes } from "@/config/routes";
+  const params = new URLSearchParams(window.location.search);
+  const action = params.get("action");
 
   const form = document.getElementById("create-user");
 
-  form?.addEventListener("submit", (event) => {
-    event.preventDefault();
+  const nameElement = document.getElementById("name") as HTMLInputElement;
+  const genderElement = document.getElementById("gender") as HTMLSelectElement;
+  const birthDateElement = document.getElementById(
+    "birthDate"
+  ) as HTMLInputElement;
 
-    const name = (
-      document.getElementById("name") as HTMLInputElement
-    ).value.trim();
-    const gender = (document.getElementById("gender") as HTMLSelectElement)
-      .value;
-    const birthDate = (document.getElementById("birthDate") as HTMLInputElement)
-      .value;
+  if (action === "update") {
+    const idParam = params.get("id");
+    const nameParam = params.get("name");
+    const birthDateParam = params.get("birthDate");
+    const genderParam = params.get("gender");
 
-    const newUser = {
-      name,
-      gender,
-      birthdate: birthDate,
-    };
+    if (nameParam !== null) nameElement.value = nameParam;
+    if (birthDateParam !== null) birthDateElement.value = birthDateParam;
+    if (genderParam !== null) genderElement.value = genderParam;
 
-    fetch(routes.users, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newUser),
-    })
-      .then(async (response) => {
-        const data = await response.json();
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
 
-        if (!response.ok) {
-          console.error("Error en creación de usuario:", data);
-          throw new Error("Error al crear el usuario");
-        }
+      const id: number = Number(idParam);
+      const name = nameElement.value.trim();
+      const gender = genderElement.value;
+      const birthDate = birthDateElement.value;
+
+      const userForUpdate = {
+        id,
+        name,
+        gender,
+        birthdate: birthDate,
+      };
+
+      fetch(routes.users, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userForUpdate),
       })
-      .then((data) => {
-        console.log("Usuario creado:", data);
-        alert("Usuario creado con éxito");
-        location.reload();
+        .then(async (response) => {
+          const data = await response.json();
+
+          if (!response.ok) {
+            console.error("Error en la actualizacón de un usuario:", data);
+            throw new Error("Error al actualizar el usuario");
+          }
+        })
+        .then((data) => {
+          console.log("Usuario actualizado:", data);
+          alert("Usuario actualizado con éxito");
+          location.reload();
+        })
+        .catch((error) => {
+          location.reload();
+          alert("No se pudo actualizar el usuario");
+        });
+    });
+  } else {
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const name = (
+        document.getElementById("name") as HTMLInputElement
+      ).value.trim();
+      const gender = (document.getElementById("gender") as HTMLSelectElement)
+        .value;
+      const birthDate = (
+        document.getElementById("birthDate") as HTMLInputElement
+      ).value;
+
+      const newUser = {
+        name,
+        gender,
+        birthdate: birthDate,
+      };
+
+      fetch(routes.users, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUser),
       })
-      .catch((error) => {
-        location.reload();
-        alert("No se pudo crear el usuario");
-      });
-  });
+        .then(async (response) => {
+          const data = await response.json();
+
+          if (!response.ok) {
+            console.error("Error en creación de usuario:", data);
+            throw new Error("Error al crear el usuario");
+          }
+        })
+        .then((data) => {
+          console.log("Usuario creado:", data);
+          alert("Usuario creado con éxito");
+          location.reload();
+        })
+        .catch((error) => {
+          location.reload();
+          alert("No se pudo crear el usuario");
+        });
+    });
+  }
 </script>
