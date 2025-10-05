@@ -1,5 +1,4 @@
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Backend_PruebaDigitalBank
 {
@@ -9,11 +8,13 @@ namespace Backend_PruebaDigitalBank
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
-			builder.Services.AddCors(options => {
-				options.AddPolicy("AllowAllOrigins", builder => {
-					builder.AllowAnyOrigin()
-						   .AllowAnyMethod()
-						   .AllowAnyHeader();
+			builder.Services.AddCors(options =>
+			{
+				options.AddPolicy("AllowAllOrigins", policy =>
+				{
+					policy.AllowAnyOrigin()
+						  .AllowAnyMethod()
+						  .AllowAnyHeader();
 				});
 			});
 
@@ -32,9 +33,10 @@ namespace Backend_PruebaDigitalBank
 			builder.Services.AddSingleton<IRequestHandler<Business.Commands.User.GetAll, Business.Commands.User.GetAllResponse>, Business.Handlers.User.GetAll>();
 			builder.Services.AddSingleton<IRequestHandler<Business.Commands.User.Create, Business.Commands.User.CreateResponse>, Business.Handlers.User.Create>();
 			builder.Services.AddSingleton<IRequestHandler<Business.Commands.User.Update, Business.Commands.User.UpdateResponse>, Business.Handlers.User.Update>();
+			builder.Services.AddSingleton<IRequestHandler<Business.Commands.User.Delete, Business.Commands.User.DeleteResponse>, Business.Handlers.User.Delete>();
 
 			// Test
-			builder.Services.AddHostedService<Test>();
+			//builder.Services.AddHostedService<Test>();
 
 			var app = builder.Build();
 

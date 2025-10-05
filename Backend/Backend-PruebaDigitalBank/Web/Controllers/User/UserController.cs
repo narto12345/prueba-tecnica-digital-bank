@@ -117,4 +117,24 @@ public class UserController : ControllerBase
 			Data = result.User
 		});
 	}
+
+	[HttpDelete("{id:int}")]
+	public async Task<ActionResult> Delete(int id)
+	{
+		Business.Commands.User.DeleteResponse result = await _mediator.Send(new Business.Commands.User.Delete()
+		{
+			Id = id
+		});
+
+		if (!result.Success)
+		{
+			return StatusCode((int)result.StatusCode, new
+			{
+				Status = result.StatusCode,
+				Message = result.ErrorMessage
+			});
+		}
+
+		return StatusCode((int)result.StatusCode);
+	}
 }

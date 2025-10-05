@@ -51,8 +51,10 @@ END$$
 DELIMITER ;
 */
 
-CALL sp_users_crud('INSERT', NULL, 'Nicolás', '2000-05-01', 'M');
+CALL sp_users_crud('INSERT', NULL, 'Angie', '2003-12-01', 'F');
 CALL sp_users_crud('SELECT', NULL, NULL, NULL, NULL);
 CALL sp_users_crud('SELECT', 4, NULL, NULL, NULL);
-CALL sp_users_crud('UPDATE', 4, 'Nicolás Sosa', '2000-02-18', 'M');
-CALL sp_users_crud('DELETE', 3, NULL, NULL, NULL);
+CALL sp_users_crud('UPDATE', 4, 'Nicolas Sosa', '2000-04-19', 'M');
+CALL sp_users_crud('DELETE', 8, NULL, NULL, NULL);
+
+
