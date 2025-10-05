@@ -9,6 +9,14 @@ namespace Backend_PruebaDigitalBank
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
+			builder.Services.AddCors(options => {
+				options.AddPolicy("AllowAllOrigins", builder => {
+					builder.AllowAnyOrigin()
+						   .AllowAnyMethod()
+						   .AllowAnyHeader();
+				});
+			});
+
 			builder.Services.AddControllers();
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
@@ -36,8 +44,9 @@ namespace Backend_PruebaDigitalBank
 				app.UseSwaggerUI();
 			}
 
-			app.UseAuthorization();
+			app.UseCors("AllowAllOrigins");
 
+			app.UseAuthorization();
 			app.MapControllers();
 
 			app.Run();

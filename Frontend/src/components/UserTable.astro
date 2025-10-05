@@ -1,0 +1,68 @@
+---
+
+---
+
+<section>
+  <table id="users-table">
+    <thead>
+      <tr>
+        <td>Nombre</td>
+        <td>Sexo</td>
+        <td>Fecha de nacimiento</td>
+      </tr>
+    </thead>
+
+    <tbody> </tbody>
+  </table>
+</section>
+
+<script>
+  import { ApiRoutes } from "@/config/routes";
+  import { type UserGetAll, type User } from "@models/User";
+
+  const table = document.querySelector("table#users-table tbody");
+  const baseUrl: string = ApiRoutes.users;
+
+  const loadData = () => {
+    fetch(`http://localhost:5000/api/users`)
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        const users: UserGetAll = json;
+        AddElements(users.data);
+      });
+  };
+
+  document.addEventListener("DOMContentLoaded", loadData);
+
+  function AddElements(users: User[]): void {
+    const rows: HTMLTableRowElement[] = users.map((user) => {
+
+      const newRow = document.createElement("tr");
+
+      const name = document.createElement("td");
+      name.textContent = user.name;
+      newRow.appendChild(name);
+
+      const gender = document.createElement("td");
+      gender.textContent = user.gender;
+      newRow.appendChild(gender);
+
+      const birthday = document.createElement("td");
+      birthday.textContent = user.birthdate;
+      newRow.appendChild(birthday);
+
+      return newRow;
+    });
+
+    rows.forEach((row) => table?.appendChild(row));
+  }
+
+  function clearTable() {
+    if (!table) {
+      return;
+    }
+
+    table.innerHTML = "";
+  }
+</script>
