@@ -1,9 +1,7 @@
-﻿using Data.Dto.User;
-using Data.Models;
+﻿using Data.Models;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using System.Data;
-
 
 namespace Data.DAO;
 
@@ -116,9 +114,9 @@ public class UserMySql : IUserDAO
 		return result;
 	}
 
-	public async Task<int> Update(User user)
+	public async Task<User?> Update(User user)
 	{
-		int result = 0;
+		User? updatedUser = null;
 
 		using (var conn = new MySqlConnection(_connectionString))
 		using (var cmd = new MySqlCommand("sp_users_crud", conn))
@@ -136,12 +134,18 @@ public class UserMySql : IUserDAO
 			{
 				if (await reader.ReadAsync())
 				{
-					result = reader.GetInt32(reader.GetOrdinal("updated_rows"));
+					updatedUser = new User()
+					{
+						Id = reader.GetInt32(reader.GetOrdinal("id")),
+						Name = reader.GetString(reader.GetOrdinal("name")),
+						Birthdate = DateOnly.FromDateTime(reader.GetDateTime(reader.GetOrdinal("birthdate"))),
+						Gender = reader.GetChar(reader.GetOrdinal("gender"))
+					};
 				}
 			}
 		}
 
-		return result;
+		return updatedUser;
 	}
 	public async Task<int> Delete(int id)
 	{

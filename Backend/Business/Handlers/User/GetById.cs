@@ -34,7 +34,7 @@ public class GetById : IRequestHandler<Commands.User.GetById, Commands.User.GetI
 	{
 		Data.Models.User? userFounded = await _user.GetById(request.Id);
 
-		if (userFounded == null)
+		if (userFounded is null)
 		{
 			return new Commands.User.GetIdResponse()
 			{

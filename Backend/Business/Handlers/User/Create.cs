@@ -47,7 +47,7 @@ public class Create : IRequestHandler<Commands.User.Create, Commands.User.Create
 		return new Commands.User.CreateResponse()
 		{
 			Success = true,
-			StatusCode = HttpStatusCode.OK,
+			StatusCode = HttpStatusCode.Created,
 			User = new Data.Models.User()
 			{
 				Id = userId,

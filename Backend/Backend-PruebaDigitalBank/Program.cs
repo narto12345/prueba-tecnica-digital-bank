@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Backend_PruebaDigitalBank
 {
@@ -22,6 +23,7 @@ namespace Backend_PruebaDigitalBank
 			builder.Services.AddSingleton<IRequestHandler<Business.Commands.User.GetById, Business.Commands.User.GetIdResponse>, Business.Handlers.User.GetById>();
 			builder.Services.AddSingleton<IRequestHandler<Business.Commands.User.GetAll, Business.Commands.User.GetAllResponse>, Business.Handlers.User.GetAll>();
 			builder.Services.AddSingleton<IRequestHandler<Business.Commands.User.Create, Business.Commands.User.CreateResponse>, Business.Handlers.User.Create>();
+			builder.Services.AddSingleton<IRequestHandler<Business.Commands.User.Update, Business.Commands.User.UpdateResponse>, Business.Handlers.User.Update>();
 
 			// Test
 			builder.Services.AddHostedService<Test>();
