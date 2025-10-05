@@ -47,7 +47,7 @@ public class Delete : IRequestHandler<Commands.User.Delete, Commands.User.Delete
 		return new Commands.User.DeleteResponse()
 		{
 			Success = true,
-			StatusCode = HttpStatusCode.NoContent
+			StatusCode = HttpStatusCode.OK
 		};
 	}
 }

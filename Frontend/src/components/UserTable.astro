@@ -9,6 +9,7 @@
         <td>Nombre</td>
         <td>Sexo</td>
         <td>Fecha de nacimiento</td>
+        <td>Acciones</td>
       </tr>
     </thead>
 
@@ -17,27 +18,53 @@
 </section>
 
 <script>
-  import { ApiRoutes } from "@/config/routes";
+  import { routes } from "@/config/routes";
   import { type UserGetAll, type User } from "@models/User";
 
   const table = document.querySelector("table#users-table tbody");
-  const baseUrl: string = ApiRoutes.users;
 
   const loadData = () => {
-    fetch(`http://localhost:5000/api/users`)
+    fetch(routes.users)
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
         const users: UserGetAll = json;
-        AddElements(users.data);
+
+        if (users.data) AddElements(users.data);
+      });
+  };
+
+  const deleteData = (id: number) => {
+    fetch(`${routes.users}/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al eliminar el recurso");
+        }
+        return response.json();
+      })
+      .then((json) => {
+        console.log(json);
+        location.reload();
       });
   };
 
   document.addEventListener("DOMContentLoaded", loadData);
 
   function AddElements(users: User[]): void {
-    const rows: HTMLTableRowElement[] = users.map((user) => {
+    if (!users || users.length === 0) {
+      const noDataRow = document.createElement("tr");
+      const noDataCell = document.createElement("td");
+      noDataCell.colSpan = 4;
+      noDataCell.textContent = "No existe usuarios creados";
+      noDataCell.style.textAlign = "center";
+      noDataRow.appendChild(noDataCell);
+      table?.appendChild(noDataRow);
+      return;
+    }
 
+    const rows: HTMLTableRowElement[] = users.map((user) => {
       const newRow = document.createElement("tr");
 
       const name = document.createElement("td");
@@ -51,6 +78,25 @@
       const birthday = document.createElement("td");
       birthday.textContent = user.birthdate;
       newRow.appendChild(birthday);
+
+      const actionButtons = document.createElement("td");
+
+      const updateButton = document.createElement("button");
+      updateButton.textContent = "Modificar";
+
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "Eliminar";
+
+      deleteButton.addEventListener("click", () => {
+        if (confirm(`¿Seguro que quieres eliminar a ${user.name}?`)) {
+          deleteData(user.id);
+        }
+      });
+
+      actionButtons.appendChild(updateButton);
+      actionButtons.appendChild(deleteButton);
+
+      newRow.appendChild(actionButtons);
 
       return newRow;
     });

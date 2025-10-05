@@ -1,5 +1,6 @@
 export interface UserGetAll {
-    status: number
+    result: boolean,
+    status: number,
     data: User[]
 }
 

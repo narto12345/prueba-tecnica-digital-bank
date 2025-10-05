@@ -26,6 +26,7 @@ public class UserController : ControllerBase
 		{
 			return StatusCode((int)result.StatusCode, new
 			{
+				Ok = false,
 				Status = result.StatusCode,
 				Message = result.ErrorMessage
 			});
@@ -33,6 +34,7 @@ public class UserController : ControllerBase
 
 		return StatusCode((int)result.StatusCode, new
 		{
+			Ok = true,
 			Status = result.StatusCode,
 			Data = result.User
 		});
@@ -47,6 +49,7 @@ public class UserController : ControllerBase
 		{
 			return StatusCode((int)result.StatusCode, new
 			{
+				Ok = false,
 				Status = result.StatusCode,
 				Message = result.ErrorMessage
 			});
@@ -54,6 +57,7 @@ public class UserController : ControllerBase
 
 		return StatusCode((int)result.StatusCode, new
 		{
+			Ok = true,
 			Status = result.StatusCode,
 			Data = result.User
 		});
@@ -76,6 +80,7 @@ public class UserController : ControllerBase
 		{
 			return StatusCode((int)result.StatusCode, new
 			{
+				Ok = false,
 				Status = result.StatusCode,
 				Message = result.ErrorMessage
 			});
@@ -83,6 +88,7 @@ public class UserController : ControllerBase
 
 		return StatusCode((int)result.StatusCode, new
 		{
+			Ok = true,
 			Status = result.StatusCode,
 			Data = result.User
 		});
@@ -106,6 +112,7 @@ public class UserController : ControllerBase
 		{
 			return StatusCode((int)result.StatusCode, new
 			{
+				Ok = false,
 				Status = result.StatusCode,
 				Message = result.ErrorMessage
 			});
@@ -113,6 +120,7 @@ public class UserController : ControllerBase
 
 		return StatusCode((int)result.StatusCode, new
 		{
+			Ok = true,
 			Status = result.StatusCode,
 			Data = result.User
 		});
@@ -130,11 +138,16 @@ public class UserController : ControllerBase
 		{
 			return StatusCode((int)result.StatusCode, new
 			{
+				Ok = false,
 				Status = result.StatusCode,
 				Message = result.ErrorMessage
 			});
 		}
 
-		return StatusCode((int)result.StatusCode);
+		return StatusCode((int)result.StatusCode, new
+		{
+			Ok = true,
+			Status = result.StatusCode
+		});
 	}
 }

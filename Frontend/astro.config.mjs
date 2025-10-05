@@ -4,7 +4,7 @@ import { defineConfig } from "astro/config";
 // https://astro.build/config
 export default defineConfig({
   redirects: {
-    "/": "/usuario-consulta",
+    "/": "/usuario",
   },
   vite: {
     resolve: {
