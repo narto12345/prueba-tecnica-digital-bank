@@ -1,4 +1,5 @@
-﻿using Data.Models;
+﻿using Data.Dto.User;
+using Data.Models;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using System.Data;
@@ -117,11 +118,57 @@ public class UserMySql : IUserDAO
 
 	public async Task<int> Update(User user)
 	{
-		throw new NotImplementedException();
+		int result = 0;
+
+		using (var conn = new MySqlConnection(_connectionString))
+		using (var cmd = new MySqlCommand("sp_users_crud", conn))
+		{
+			cmd.CommandType = CommandType.StoredProcedure;
+			cmd.Parameters.AddWithValue("@p_action", "UPDATE");
+			cmd.Parameters.AddWithValue("@p_id", user.Id);
+			cmd.Parameters.AddWithValue("@p_name", user.Name);
+			cmd.Parameters.AddWithValue("@p_birthdate", user.Birthdate.ToString("yyyy-MM-dd"));
+			cmd.Parameters.AddWithValue("@p_gender", user.Gender);
+
+			await conn.OpenAsync();
+
+			using (System.Data.Common.DbDataReader reader = await cmd.ExecuteReaderAsync())
+			{
+				if (await reader.ReadAsync())
+				{
+					result = reader.GetInt32(reader.GetOrdinal("updated_rows"));
+				}
+			}
+		}
+
+		return result;
 	}
 	public async Task<int> Delete(int id)
 	{
 
-		throw new NotImplementedException();
+		int result = 0;
+
+		using (var conn = new MySqlConnection(_connectionString))
+		using (var cmd = new MySqlCommand("sp_users_crud", conn))
+		{
+			cmd.CommandType = CommandType.StoredProcedure;
+			cmd.Parameters.AddWithValue("@p_action", "DELETE");
+			cmd.Parameters.AddWithValue("@p_id", id);
+			cmd.Parameters.AddWithValue("@p_name", null);
+			cmd.Parameters.AddWithValue("@p_birthdate", null);
+			cmd.Parameters.AddWithValue("@p_gender", null);
+
+			await conn.OpenAsync();
+
+			using (System.Data.Common.DbDataReader reader = await cmd.ExecuteReaderAsync())
+			{
+				if (await reader.ReadAsync())
+				{
+					result = reader.GetInt32(reader.GetOrdinal("deleted_rows"));
+				}
+			}
+		}
+
+		return result;
 	}
 }
