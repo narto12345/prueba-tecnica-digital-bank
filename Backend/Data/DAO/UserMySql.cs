@@ -87,9 +87,32 @@ public class UserMySql : IUserDAO
 		return user;
 	}
 
-	public async Task<int> Insert(User user)
+	public async Task<int> Insert(Dto.User.Create create)
 	{
-		throw new NotImplementedException();
+		int result = 0;
+
+		using (var conn = new MySqlConnection(_connectionString))
+		using (var cmd = new MySqlCommand("sp_users_crud", conn))
+		{
+			cmd.CommandType = CommandType.StoredProcedure;
+			cmd.Parameters.AddWithValue("@p_action", "INSERT");
+			cmd.Parameters.AddWithValue("@p_id", null);
+			cmd.Parameters.AddWithValue("@p_name", create.Name);
+			cmd.Parameters.AddWithValue("@p_birthdate", create.Birthdate.ToString("yyyy-MM-dd"));
+			cmd.Parameters.AddWithValue("@p_gender", create.Gender);
+
+			await conn.OpenAsync();
+
+			using (System.Data.Common.DbDataReader reader = await cmd.ExecuteReaderAsync())
+			{
+				if (await reader.ReadAsync())
+				{
+					result = reader.GetInt32(reader.GetOrdinal("new_id"));
+				}
+			}
+		}
+
+		return result;
 	}
 
 	public async Task<int> Update(User user)

@@ -59,4 +59,28 @@ public class UserController : ControllerBase
 			Data = result.User
 		});
 	}
+
+	[HttpPost]
+	public async Task<ActionResult> Create([FromBody] Data.Dto.User.Create create)
+	{
+		Business.Commands.User.CreateResponse result = await _mediator.Send(new Business.Commands.User.Create()
+		{
+			NewUser = create
+		});
+
+		if (!result.Success)
+		{
+			return StatusCode((int)result.StatusCode, new
+			{
+				Status = result.StatusCode,
+				Message = result.ErrorMessage
+			});
+		}
+
+		return StatusCode((int)result.StatusCode, new
+		{
+			Status = result.StatusCode,
+			Data = result.User
+		});
+	}
 }

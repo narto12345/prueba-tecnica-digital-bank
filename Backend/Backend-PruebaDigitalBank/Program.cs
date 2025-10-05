@@ -21,6 +21,7 @@ namespace Backend_PruebaDigitalBank
 			// Handlers
 			builder.Services.AddSingleton<IRequestHandler<Business.Commands.User.GetById, Business.Commands.User.GetIdResponse>, Business.Handlers.User.GetById>();
 			builder.Services.AddSingleton<IRequestHandler<Business.Commands.User.GetAll, Business.Commands.User.GetAllResponse>, Business.Handlers.User.GetAll>();
+			builder.Services.AddSingleton<IRequestHandler<Business.Commands.User.Create, Business.Commands.User.CreateResponse>, Business.Handlers.User.Create>();
 
 			// Test
 			builder.Services.AddHostedService<Test>();
