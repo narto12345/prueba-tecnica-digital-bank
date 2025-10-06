@@ -2,20 +2,75 @@
 
 ---
 
-<section>
-  <table id="users-table">
-    <thead>
-      <tr>
-        <td>Nombre</td>
-        <td>Sexo</td>
-        <td>Fecha de nacimiento</td>
-        <td>Acciones</td>
-      </tr>
-    </thead>
-
-    <tbody> </tbody>
-  </table>
+<section class="grilla contenedor">
+  <div class="tabla-contenedor">
+    <table id="users-table" class="user-table">
+      <thead>
+        <tr class="thead">
+          <th>Nombre</th>
+          <th>Sexo</th>
+          <th>Fecha de nacimiento</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="tbody"> </tbody>
+    </table>
+  </div>
 </section>
+
+<style is:global>
+  .grilla {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .tabla-contenedor {
+    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    background: #ffffff;
+    border-radius: 16px;
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .user-table {
+    border-collapse: collapse;
+  }
+
+  .thead th {
+    text-transform: uppercase;
+    padding: 20px;
+  }
+
+  .tbody tr:nth-child(2n + 1) {
+    background-color: rgb(235, 245, 252);
+  }
+
+  .td-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px;
+  }
+
+  .user-table button {
+    padding: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    background: rgb(26, 140, 216);
+    color: white;
+    transition: transform 0.3s ease;
+  }
+
+  .user-table button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+</style>
 
 <script>
   import { routes } from "@/config/routes";
@@ -41,7 +96,7 @@
       const noDataRow = document.createElement("tr");
       const noDataCell = document.createElement("td");
       noDataCell.colSpan = 4;
-      noDataCell.textContent = "No existe usuarios creados";
+      noDataCell.textContent = "No existen usuarios creados";
       noDataCell.style.textAlign = "center";
       noDataRow.appendChild(noDataCell);
       table?.appendChild(noDataRow);
@@ -64,6 +119,7 @@
       newRow.appendChild(birthday);
 
       const actionButtons = document.createElement("td");
+      actionButtons.classList.add("td-action");
 
       const updateButton = document.createElement("button");
       updateButton.textContent = "Modificar";

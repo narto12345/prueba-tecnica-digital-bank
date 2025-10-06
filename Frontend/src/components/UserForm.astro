@@ -37,7 +37,7 @@ const today = new Date().toISOString().split("T")[0];
       />
     </div>
 
-    <button class="button-submit" type="submit">Crear</button>
+    <button id="button-form" class="button-submit" type="submit">Crear</button>
   </div>
 </form>
 
@@ -98,6 +98,9 @@ const today = new Date().toISOString().split("T")[0];
   const nameEl = document.getElementById("name") as HTMLInputElement;
   const genderEl = document.getElementById("gender") as HTMLSelectElement;
   const birthDateEl = document.getElementById("birthDate") as HTMLInputElement;
+  const buttonSubmit = document.getElementById(
+    "button-form"
+  ) as HTMLButtonElement;
 
   const params = new URLSearchParams(window.location.search);
   const action = params.get("action");
@@ -107,6 +110,7 @@ const today = new Date().toISOString().split("T")[0];
     nameEl.value = params.get("name") ?? "";
     birthDateEl.value = params.get("birthDate") ?? "";
     genderEl.value = params.get("gender") ?? "";
+    buttonSubmit.innerText = "Actualizar";
   }
 
   form?.addEventListener("submit", async (event) => {
@@ -141,7 +145,7 @@ const today = new Date().toISOString().split("T")[0];
         console.log(`Usuario ${isUpdate ? "actualizado" : "creado"}:`, data);
         alert(`Usuario ${isUpdate ? "actualizado" : "creado"} con éxito`);
 
-        window.location.href = window.location.pathname;
+        window.location.href = "/usuario-consulta";
       }
     } catch (err) {
       console.error(err);
