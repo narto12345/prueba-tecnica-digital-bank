@@ -8,6 +8,7 @@
       "@models/*": ["./src/models/*"],
       "@components/*": ["./src/components/*"],
       "@layouts/*": ["./src/layouts/*"],
+      "@styles/*": ["./src/styles/*"],
       "@services/*": ["./src/services/*"],
       "@config/*": ["./src/config/*"]
     }

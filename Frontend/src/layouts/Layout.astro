@@ -1,33 +1,31 @@
+---
+import "@styles/normalize.css";
+import "@styles/styles.css";
+---
+
 <!doctype html>
 <html lang="es-CO">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+    <title>Prueba Técnica - Digital Bank</title>
   </head>
   <body>
     <header>
-      <h1>Prueba Técnica - Digital Bank Servicios Transaccionales</h1>
+      <h1 class="title">
+        Prueba Técnica - Digital Bank Servicios Transaccionales
+      </h1>
+      <div class="nav-contenedor">
+        <nav class="nav-principal">
+          <a href="/usuario">Usuarios</a>
+          <a href="/usuario-consulta">Usuario Consulta</a>
+        </nav>
+      </div>
     </header>
-    <div class="contenedor-navegacion">
-      <nav class="nav-principal contenedor">
-        <a href="/usuario">Usuarios</a>
-        <a href="/usuario-consulta">Usuario Consulta</a>
-      </nav>
-    </div>
+
     <main>
       <slot />
     </main>
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>

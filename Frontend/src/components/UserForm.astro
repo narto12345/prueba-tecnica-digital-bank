@@ -1,43 +1,95 @@
 ---
-
 const today = new Date().toISOString().split("T")[0];
 ---
 
-<form id="create-user">
-  <label>
-    Nombre:
-    <input
-      required
-      id="name"
-      type="text"
-      placeholder="Escribe tu nombre"
-      name="name"
-      value=""
-    />
-  </label>
+<form class="form-user contenedor" id="create-user">
+  <div class="display-form">
+    <div>
+      <label for="name"> Nombre: </label>
+      <input
+        required
+        id="name"
+        type="text"
+        class="input-element"
+        placeholder="Escribe tu nombre"
+        name="name"
+      />
+    </div>
 
-  <div>
-    <label for="gender">Sexo:</label>
-    <select required name="gender" id="gender">
-      <option value="" disabled selected>-- Seleccione --</option>
-      <option value="M">Masculino</option>
-      <option value="F">Femenino</option>
-    </select>
+    <div>
+      <label for="gender">Sexo:</label>
+      <select required name="gender" id="gender" class="input-element">
+        <option value="" disabled selected>-- Seleccione --</option>
+        <option value="M">Masculino</option>
+        <option value="F">Femenino</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="birthDate">Fecha de nacimiento:</label>
+      <input
+        required
+        id="birthDate"
+        class="input-element"
+        type="date"
+        name="birthDate"
+        max={today}
+      />
+    </div>
+
+    <button class="button-submit" type="submit">Crear</button>
   </div>
-
-  <div>
-    <label for="birthDate">Fecha de nacimiento:</label>
-    <input
-      required
-      id="birthDate"
-      type="date"
-      name="birthDate"
-      max={today}
-    />
-  </div>
-
-  <button type="submit">Crear</button>
 </form>
+
+<style>
+  .form-user {
+    max-width: 600px;
+    margin-top: 80px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+  }
+
+  .display-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-user label {
+    font-weight: 600;
+    font-size: 20px;
+    color: #333;
+  }
+
+  .form-user .input-element {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px 14px;
+    margin-bottom: 18px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+
+  .form-user .button-submit {
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    background: rgb(26, 140, 216);
+    color: white;
+    margin-top: 15px;
+    transition: transform 0.3s ease;
+  }
+
+  .form-user .button-submit:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+</style>
 
 <script>
   import { routes } from "@/config/routes";
@@ -84,14 +136,9 @@ const today = new Date().toISOString().split("T")[0];
           `Error en ${isUpdate ? "actualización" : "creación"} de usuario:`,
           data
         );
-        alert(
-          `No se pudo ${isUpdate ? "actualizar" : "crear"} el usuario`
-        );
+        alert(`No se pudo ${isUpdate ? "actualizar" : "crear"} el usuario`);
       } else {
-        console.log(
-          `Usuario ${isUpdate ? "actualizado" : "creado"}:`,
-          data
-        );
+        console.log(`Usuario ${isUpdate ? "actualizado" : "creado"}:`, data);
         alert(`Usuario ${isUpdate ? "actualizado" : "creado"} con éxito`);
 
         window.location.href = window.location.pathname;
