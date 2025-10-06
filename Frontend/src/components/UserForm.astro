@@ -1,9 +1,6 @@
 ---
-const now = new Date();
-const year = now.getFullYear();
-const month = (now.getMonth() + 1).toString().padStart(2, "0");
-const day = now.getDate().toString().padStart(2, "0");
-const dateString = `${year}-${month}-${day}`;
+
+const today = new Date().toISOString().split("T")[0];
 ---
 
 <form id="create-user">
@@ -35,7 +32,7 @@ const dateString = `${year}-${month}-${day}`;
       id="birthDate"
       type="date"
       name="birthDate"
-      max={dateString}
+      max={today}
     />
   </div>
 
@@ -44,110 +41,65 @@ const dateString = `${year}-${month}-${day}`;
 
 <script>
   import { routes } from "@/config/routes";
+
+  const form = document.getElementById("create-user") as HTMLFormElement;
+  const nameEl = document.getElementById("name") as HTMLInputElement;
+  const genderEl = document.getElementById("gender") as HTMLSelectElement;
+  const birthDateEl = document.getElementById("birthDate") as HTMLInputElement;
+
   const params = new URLSearchParams(window.location.search);
   const action = params.get("action");
-
-  const form = document.getElementById("create-user");
-
-  const nameElement = document.getElementById("name") as HTMLInputElement;
-  const genderElement = document.getElementById("gender") as HTMLSelectElement;
-  const birthDateElement = document.getElementById(
-    "birthDate"
-  ) as HTMLInputElement;
+  const idParam = params.get("id");
 
   if (action === "update") {
-    const idParam = params.get("id");
-    const nameParam = params.get("name");
-    const birthDateParam = params.get("birthDate");
-    const genderParam = params.get("gender");
-
-    if (nameParam !== null) nameElement.value = nameParam;
-    if (birthDateParam !== null) birthDateElement.value = birthDateParam;
-    if (genderParam !== null) genderElement.value = genderParam;
-
-    form?.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      const id: number = Number(idParam);
-      const name = nameElement.value.trim();
-      const gender = genderElement.value;
-      const birthDate = birthDateElement.value;
-
-      const userForUpdate = {
-        id,
-        name,
-        gender,
-        birthdate: birthDate,
-      };
-
-      fetch(routes.users, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userForUpdate),
-      })
-        .then(async (response) => {
-          const data = await response.json();
-
-          if (!response.ok) {
-            console.error("Error en la actualizacón de un usuario:", data);
-            throw new Error("Error al actualizar el usuario");
-          }
-        })
-        .then((data) => {
-          console.log("Usuario actualizado:", data);
-          alert("Usuario actualizado con éxito");
-          location.reload();
-        })
-        .catch((error) => {
-          location.reload();
-          alert("No se pudo actualizar el usuario");
-        });
-    });
-  } else {
-    form?.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      const name = (
-        document.getElementById("name") as HTMLInputElement
-      ).value.trim();
-      const gender = (document.getElementById("gender") as HTMLSelectElement)
-        .value;
-      const birthDate = (
-        document.getElementById("birthDate") as HTMLInputElement
-      ).value;
-
-      const newUser = {
-        name,
-        gender,
-        birthdate: birthDate,
-      };
-
-      fetch(routes.users, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      })
-        .then(async (response) => {
-          const data = await response.json();
-
-          if (!response.ok) {
-            console.error("Error en creación de usuario:", data);
-            throw new Error("Error al crear el usuario");
-          }
-        })
-        .then((data) => {
-          console.log("Usuario creado:", data);
-          alert("Usuario creado con éxito");
-          location.reload();
-        })
-        .catch((error) => {
-          location.reload();
-          alert("No se pudo crear el usuario");
-        });
-    });
+    nameEl.value = params.get("name") ?? "";
+    birthDateEl.value = params.get("birthDate") ?? "";
+    genderEl.value = params.get("gender") ?? "";
   }
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const user = {
+      id: idParam ? Number(idParam) : undefined,
+      name: nameEl.value.trim(),
+      gender: genderEl.value,
+      birthdate: birthDateEl.value,
+    };
+
+    const isUpdate = action === "update";
+    const method = isUpdate ? "PUT" : "POST";
+
+    try {
+      const response = await fetch(routes.users, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.error(
+          `Error en ${isUpdate ? "actualización" : "creación"} de usuario:`,
+          data
+        );
+        alert(
+          `No se pudo ${isUpdate ? "actualizar" : "crear"} el usuario`
+        );
+      } else {
+        console.log(
+          `Usuario ${isUpdate ? "actualizado" : "creado"}:`,
+          data
+        );
+        alert(`Usuario ${isUpdate ? "actualizado" : "creado"} con éxito`);
+
+        window.location.href = window.location.pathname;
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error inesperado en la operación");
+      window.location.href = window.location.pathname;
+    }
+  });
 </script>

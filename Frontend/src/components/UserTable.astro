@@ -34,22 +34,6 @@
       });
   };
 
-  const deleteData = (id: number) => {
-    fetch(`${routes.users}/${id}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Error al eliminar el recurso");
-        }
-        return response.json();
-      })
-      .then((json) => {
-        console.log(json);
-        location.reload();
-      });
-  };
-
   document.addEventListener("DOMContentLoaded", loadData);
 
   function AddElements(users: User[]): void {
@@ -84,6 +68,17 @@
       const updateButton = document.createElement("button");
       updateButton.textContent = "Modificar";
 
+      updateButton.addEventListener("click", () => {
+        const url = new URL("http://localhost:4321/usuario");
+        url.searchParams.set("action", "update");
+        url.searchParams.set("id", user.id.toString());
+        url.searchParams.set("name", user.name);
+        url.searchParams.set("birthDate", user.birthdate);
+        url.searchParams.set("gender", user.gender);
+
+        window.location.href = url.toString();
+      });
+
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Eliminar";
 
@@ -104,11 +99,19 @@
     rows.forEach((row) => table?.appendChild(row));
   }
 
-  function clearTable() {
-    if (!table) {
-      return;
-    }
-
-    table.innerHTML = "";
-  }
+  const deleteData = (id: number) => {
+    fetch(`${routes.users}/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al eliminar el recurso");
+        }
+        return response.json();
+      })
+      .then((json) => {
+        console.log(json);
+        location.reload();
+      });
+  };
 </script>
