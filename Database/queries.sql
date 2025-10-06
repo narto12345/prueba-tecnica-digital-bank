@@ -7,13 +7,9 @@ CREATE TABLE USERS (
     gender CHAR(1)
 );
 
--- INSERT INTO users(name, birthdate, gender) VALUES ('Duvan', '2000-04-04', 'M'), ('David', '2000-04-28', 'M');
-
 SELECT * FROM USERS;
 
-/*
 DELIMITER $$
-
 CREATE PROCEDURE sp_users_crud(
     IN p_action VARCHAR(10),
     IN p_id INT,
@@ -40,21 +36,20 @@ BEGIN
             gender = p_gender
         WHERE id = p_id;
 
-        SELECT ROW_COUNT() AS updated_rows;
+		SELECT * FROM USERS WHERE id = p_id;
 
     ELSEIF UPPER(p_action) = 'DELETE' THEN
         DELETE FROM USERS WHERE id = p_id;
         SELECT ROW_COUNT() AS deleted_rows;
     END IF;
 END$$
-
 DELIMITER ;
-*/
+
 
 CALL sp_users_crud('INSERT', NULL, 'Angie', '2003-12-01', 'F');
 CALL sp_users_crud('SELECT', NULL, NULL, NULL, NULL);
-CALL sp_users_crud('SELECT', 4, NULL, NULL, NULL);
-CALL sp_users_crud('UPDATE', 4, 'Nicolas Sosa', '2000-04-19', 'M');
-CALL sp_users_crud('DELETE', 8, NULL, NULL, NULL);
+CALL sp_users_crud('SELECT', 46, NULL, NULL, NULL);
+CALL sp_users_crud('UPDATE', 44, 'Angie Alejandra', '2000-04-19', 'F');
+CALL sp_users_crud('DELETE', 50, NULL, NULL, NULL);
 
 
